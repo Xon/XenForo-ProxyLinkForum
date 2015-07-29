@@ -5,7 +5,7 @@ class SV_ProxyLinkForum_XenForo_NodeHandler_LinkForum extends XFCP_SV_ProxyLinkF
         array $renderedChildren, $level
     )
     {
-        if (empty($node['sv_is_proxy']))
+        if (empty($node['sv_proxy_node_id']))
         {
             return parent::renderNodeForTree($view, $node, $permissions, $renderedChildren, $level);
         }
@@ -20,14 +20,9 @@ class SV_ProxyLinkForum_XenForo_NodeHandler_LinkForum extends XFCP_SV_ProxyLinkF
     }
     public function getPushableDataForNode(array $node, array $childPushable, array $permissions)
     {
-        if (empty($node['sv_is_proxy']))
+        if (empty($node['sv_proxy_node_id']))
         {
             return parent::getPushableDataForNode($node, $childPushable, $permissions);
-        }
-        if (!XenForo_Permission::hasContentPermission($permissions, 'viewOthers'))
-        {
-// todo
-            //return $this->_compileForumLikePushableData(array('privateInfo' => true), $childPushable);
         }
 
         return $this->_getForumLikePushableData($node, $childPushable);
@@ -39,12 +34,23 @@ class SV_ProxyLinkForum_XenForo_NodeHandler_LinkForum extends XFCP_SV_ProxyLinkF
         $permissionCombinationId = XenForo_Visitor::getPermissionCombinationId();
         $forumFetchOptions = array('readUserId' => $userId, 'permissionCombinationId' => $permissionCombinationId);
 
-        return $this->_getForumModel()->getExtraForumDataForLinkNodes($nodeIds, $forumFetchOptions);
+        $nodes = $this->_getForumModel()->getExtraForumDataForLinkNodes($nodeIds, $forumFetchOptions);
+        foreach($nodes as $key => &$node)
+        {
+            $proxyPermissions = XenForo_Permission::unserializePermissions($node['node_permission_cache']);
+            unset($node['node_permission_cache']);
+            if (!XenForo_Permission::hasContentPermission($proxyPermissions, 'viewOthers'))
+            {
+                unset($nodes[$key]);
+            }
+        }
+        
+        return $nodes;
     }
 
     public function prepareNode(array $node)
     {
-        if (empty($node['sv_is_proxy']))
+        if (empty($node['sv_proxy_node_id']))
         {
             return parent::prepareNode($node);
         }
@@ -59,7 +65,6 @@ class SV_ProxyLinkForum_XenForo_NodeHandler_LinkForum extends XFCP_SV_ProxyLinkF
         {
             $this->_forumModel = XenForo_Model::create('XenForo_Model_Forum');
         }
-
         return $this->_forumModel;
     }
 }

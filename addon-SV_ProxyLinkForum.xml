@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="SV_ProxyLinkForum" title="Proxy Link Forum" version_string="1.0.0" version_id="10000" url="" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="SV_ProxyLinkForum" title="Proxy Link Forum" version_string="1.0.0" version_id="10000" url="" install_callback_class="SV_ProxyLinkForum_Listener" install_callback_method="install" uninstall_callback_class="SV_ProxyLinkForum_Listener" uninstall_callback_method="uninstall">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties/>
   <admin_templates>
-    <template title="sv_link_forum_proxy_option"><![CDATA[<xen:checkboxunit label="">
-	<xen:option name="sv_is_proxy" label="{xen:phrase sv_is_proxy}" selected="{$link.sv_is_proxy}">
-		<xen:hint>{xen:phrase sv_is_proxy_explain}</xen:hint>
-	</xen:option>
-</xen:checkboxunit>
-
-<!-- slot: sv_is_proxy -->]]></template>
+    <template title="sv_link_forum_proxy_option"><![CDATA[<xen:spinboxunit name="sv_proxy_node_id" label="{xen:phrase sv_proxy_node_id}" value="{$link.sv_proxy_node_id}" min="0">
+    <xen:explain>{xen:phrase sv_proxy_node_id_explain}</xen:explain>
+</xen:spinboxunit>
+]]></template>
   </admin_templates>
   <admin_template_modifications>
     <modification template="link_forum_edit" modification_key="SV_ProxyLinkForum_link_forum_edit" description="" execution_order="10" enabled="1" action="str_replace">
@@ -21,7 +18,7 @@
   </admin_template_modifications>
   <code_events/>
   <code_event_listeners>
-    <listener event_id="load_class" execute_order="10" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerPublic_LinkForum" description="XenForo_ControllerPublic_LinkForum"/>
+    <listener event_id="load_class" execute_order="100" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerPublic_LinkForum" description="XenForo_ControllerPublic_LinkForum"/>
     <listener event_id="load_class" execute_order="100" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_Model_Forum" description="XenForo_Model_Forum"/>
     <listener event_id="load_class" execute_order="100" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_NodeHandler_LinkForum" description="XenForo_NodeHandler_LinkForum"/>
     <listener event_id="load_class" execute_order="100" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_DataWriter_LinkForum" description="XenForo_DataWriter_LinkForum"/>
@@ -37,8 +34,8 @@
     <interface_groups/>
   </permissions>
   <phrases>
-    <phrase title="sv_is_proxy" version_id="10000" version_string="1.0.0"><![CDATA[Is Proxy]]></phrase>
-    <phrase title="sv_is_proxy_explain" version_id="10000" version_string="1.0.0"><![CDATA[Proxies an actual forum]]></phrase>
+    <phrase title="sv_proxy_node_id" version_id="10000" version_string="1.0.0"><![CDATA[Proxy Node Id]]></phrase>
+    <phrase title="sv_proxy_node_id_explain" version_id="10000" version_string="1.0.0"><![CDATA[The Node Id to proxy. Zero to disable proxying]]></phrase>
   </phrases>
   <route_prefixes/>
   <style_properties/>
@@ -46,7 +43,7 @@
   <public_template_modifications>
     <modification template="node_forum_level_2" modification_key="SV_ProxyLinkForum_node_forum_level_2" description="" execution_order="15" enabled="1" action="str_replace">
       <find><![CDATA[{xen:link forums, $forum}]]></find>
-      <replace><![CDATA[{xen:if $forum.sv_is_proxy, '{xen:link link-forums, $forum}', '{xen:link forums, $forum}'}]]></replace>
+      <replace><![CDATA[{xen:if $forum.sv_proxy_node_id, '{xen:link link-forums, $forum}', '{xen:link forums, $forum}'}]]></replace>
     </modification>
   </public_template_modifications>
   <bb_code_media_sites/>

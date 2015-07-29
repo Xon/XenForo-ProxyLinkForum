@@ -4,15 +4,15 @@ class SV_ProxyLinkForum_XenForo_DataWriter_LinkForum extends XFCP_SV_ProxyLinkFo
     protected function _getFields()
     {
         $fields = parent::_getFields();
-        $fields['xf_link_forum']['sv_is_proxy'] = array('type' => self::TYPE_UINT_FORCED, 'default' => 0);
+        $fields['xf_link_forum']['sv_proxy_node_id'] = array('type' => self::TYPE_UINT_FORCED, 'default' => 0);
         return $fields;
     }
 
     protected function _preSave()
     {
-        if (SV_ProxyLinkForum_Globals::$sv_is_proxy !== null)
+        if (SV_ProxyLinkForum_Globals::$sv_proxy_node_id !== null)
         {
-            $this->set('sv_is_proxy', SV_ProxyLinkForum_Globals::$sv_is_proxy);
+            $this->set('sv_proxy_node_id', SV_ProxyLinkForum_Globals::$sv_proxy_node_id);
         }
         parent::_preSave();
     }
