@@ -1,9 +1,8 @@
 <?php
+
 class SV_ProxyLinkForum_XenForo_NodeHandler_LinkForum extends XFCP_SV_ProxyLinkForum_XenForo_NodeHandler_LinkForum
 {
-    public function renderNodeForTree(XenForo_View $view, array $node, array $permissions,
-        array $renderedChildren, $level
-    )
+    public function renderNodeForTree(XenForo_View $view, array $node, array $permissions, array $renderedChildren, $level)
     {
         if (empty($node['sv_proxy_node_id']))
         {
@@ -18,6 +17,7 @@ class SV_ProxyLinkForum_XenForo_NodeHandler_LinkForum extends XFCP_SV_ProxyLinkF
             'renderedChildren' => $renderedChildren
         ));
     }
+
     public function getPushableDataForNode(array $node, array $childPushable, array $permissions)
     {
         if (empty($node['sv_proxy_node_id']))
@@ -44,7 +44,7 @@ class SV_ProxyLinkForum_XenForo_NodeHandler_LinkForum extends XFCP_SV_ProxyLinkF
                 unset($nodes[$key]);
             }
         }
-        
+
         return $nodes;
     }
 

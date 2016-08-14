@@ -1,4 +1,5 @@
 <?php
+
 class SV_ProxyLinkForum_XenForo_DataWriter_LinkForum extends XFCP_SV_ProxyLinkForum_XenForo_DataWriter_LinkForum
 {
     protected function _getFields()

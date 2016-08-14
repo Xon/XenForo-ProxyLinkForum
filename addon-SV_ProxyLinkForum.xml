@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="SV_ProxyLinkForum" title="Proxy Link Forum" version_string="1.0.2a" version_id="1000201" url="https://xenforo.com/community/resources/proxy-link-forum.4449/" install_callback_class="SV_ProxyLinkForum_Installer" install_callback_method="install" uninstall_callback_class="SV_ProxyLinkForum_Installer" uninstall_callback_method="uninstall">
+<addon addon_id="SV_ProxyLinkForum" title="Proxy Link Forum" version_string="1.1.0" version_id="1010000" url="https://xenforo.com/community/resources/proxy-link-forum.4449/" install_callback_class="SV_ProxyLinkForum_Installer" install_callback_method="install" uninstall_callback_class="SV_ProxyLinkForum_Installer" uninstall_callback_method="uninstall">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties/>
   <admin_templates>
-    <template title="sv_link_forum_proxy_option"><![CDATA[<xen:spinboxunit name="sv_proxy_node_id" label="{xen:phrase sv_proxy_node_id}" value="{$link.sv_proxy_node_id}" min="0">
-    <xen:explain>{xen:phrase sv_proxy_node_id_explain}</xen:explain>
-</xen:spinboxunit>
+    <template title="sv_link_forum_proxy_option"><![CDATA[<xen:selectunit name="sv_proxy_node_id" value="{$link.sv_proxy_node_id}" label="{xen:phrase sv_proxy_node_id}:">
+	<xen:options source="$proxyNodeOptions" />
+	<xen:explain>{xen:phrase sv_proxy_node_id_explain}</xen:explain>
+</xen:selectunit>
 ]]></template>
   </admin_templates>
   <admin_template_modifications>
@@ -34,8 +35,9 @@
     <interface_groups/>
   </permissions>
   <phrases>
-    <phrase title="sv_proxy_node_id" version_id="10000" version_string="1.0.0"><![CDATA[Proxy Node Id]]></phrase>
-    <phrase title="sv_proxy_node_id_explain" version_id="10000" version_string="1.0.0"><![CDATA[The Node Id to proxy. Zero to disable proxying]]></phrase>
+    <phrase title="sv_do_not_proxy" version_id="1010000" version_string="1.1.0"><![CDATA[(Do not proxy)]]></phrase>
+    <phrase title="sv_proxy_node_id" version_id="1010000" version_string="1.1.0"><![CDATA[Proxy Node]]></phrase>
+    <phrase title="sv_proxy_node_id_explain" version_id="1010000" version_string="1.1.0"><![CDATA[The node to proxy, last message stats will be pulled from this node.]]></phrase>
   </phrases>
   <route_prefixes/>
   <style_properties/>

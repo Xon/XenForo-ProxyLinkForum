@@ -1,4 +1,5 @@
 <?php
+
 class SV_ProxyLinkForum_XenForo_Model_Forum extends XFCP_SV_ProxyLinkForum_XenForo_Model_Forum
 {
     public function getExtraForumDataForLinkNodes(array $nodeIds, array $fetchOptions = array())
