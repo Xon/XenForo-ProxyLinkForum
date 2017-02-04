@@ -32,7 +32,7 @@ class SV_ProxyLinkForum_XenForo_ControllerAdmin_LinkForum extends XFCP_SV_ProxyL
     {
         $nodeModel = $this->_getNodeModel();
         $link = $response->params['link'];
-        if (!isset($link['sv_proxy_node_id']))
+        if (!isset($link['sv_proxy_node_id']) || !is_numeric($link['sv_proxy_node_id']))
         {
             $link['sv_proxy_node_id'] = 0;
         }
