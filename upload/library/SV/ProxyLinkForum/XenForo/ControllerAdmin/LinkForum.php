@@ -4,27 +4,32 @@ class SV_ProxyLinkForum_XenForo_ControllerAdmin_LinkForum extends XFCP_SV_ProxyL
 {
     public function actionSave()
     {
-        SV_ProxyLinkForum_Globals::$sv_proxy_node_id = $this->_input->filterSingle('sv_proxy_node_id', XenForo_Input::UINT);
+        SV_ProxyLinkForum_Globals::$sv_proxy_node_id = $this->_input->filterSingle(
+            'sv_proxy_node_id', XenForo_Input::UINT
+        );
+
         return parent::actionSave();
     }
 
     public function actionEdit()
     {
         $response = parent::actionEdit();
-        if ($response instanceof XenForo_ControllerResponse_View);
+        if ($response instanceof XenForo_ControllerResponse_View)
         {
             $this->addLinkProxyBits($response);
         }
+
         return $response;
     }
 
     public function actionDeleteConfirm()
     {
         $response = parent::actionDeleteConfirm();
-        if ($response instanceof XenForo_ControllerResponse_View);
+        if ($response instanceof XenForo_ControllerResponse_View)
         {
             $this->addLinkProxyBits($response);
         }
+
         return $response;
     }
 
@@ -38,6 +43,8 @@ class SV_ProxyLinkForum_XenForo_ControllerAdmin_LinkForum extends XFCP_SV_ProxyL
         }
         $nodes = $nodeModel->getPossibleParentNodes($link);
         $nodes[0]['title'] = new XenForo_Phrase("sv_do_not_proxy");
-        $response->params['proxyNodeOptions'] = $nodeModel->getNodeOptionsArray($nodes, $link['sv_proxy_node_id'], true);
+        $response->params['proxyNodeOptions'] = $nodeModel->getNodeOptionsArray(
+            $nodes, $link['sv_proxy_node_id'], true
+        );
     }
 }

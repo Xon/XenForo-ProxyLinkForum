@@ -6,5 +6,5 @@ class SV_ProxyLinkForum_Globals
 {
     public static $sv_proxy_node_id = null;
 
-    private function __construct() {}
+    private function __construct() { }
 }

@@ -2,16 +2,17 @@
 
 class SV_ProxyLinkForum_XenForo_Model_Forum extends XFCP_SV_ProxyLinkForum_XenForo_Model_Forum
 {
-    public function getExtraForumDataForLinkNodes(array $nodeIds, array $fetchOptions = array())
+    public function getExtraForumDataForLinkNodes(array $nodeIds, array $fetchOptions = [])
     {
         if (!$nodeIds)
         {
-            return array();
+            return [];
         }
 
         $joinOptions = $this->prepareForumJoinOptions($fetchOptions);
 
-        return $this->fetchAllKeyed('
+        return $this->fetchAllKeyed(
+            '
             SELECT forum.*, link_forum.node_id, link_forum.sv_proxy_node_id
                 ' . $joinOptions['selectFields'] . '
             FROM xf_forum AS forum
@@ -19,6 +20,7 @@ class SV_ProxyLinkForum_XenForo_Model_Forum extends XFCP_SV_ProxyLinkForum_XenFo
             INNER JOIN xf_node AS node ON (node.node_id = forum.node_id)
             ' . $joinOptions['joinTables'] . '
             WHERE link_forum.node_id IN (' . $this->_getDb()->quote($nodeIds) . ') and link_forum.sv_proxy_node_id <> 0
-        ', 'node_id');
+        ', 'node_id'
+        );
     }
 }

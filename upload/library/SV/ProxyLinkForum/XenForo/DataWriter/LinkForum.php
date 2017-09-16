@@ -5,7 +5,8 @@ class SV_ProxyLinkForum_XenForo_DataWriter_LinkForum extends XFCP_SV_ProxyLinkFo
     protected function _getFields()
     {
         $fields = parent::_getFields();
-        $fields['xf_link_forum']['sv_proxy_node_id'] = array('type' => self::TYPE_UINT_FORCED, 'default' => 0);
+        $fields['xf_link_forum']['sv_proxy_node_id'] = ['type' => self::TYPE_UINT_FORCED, 'default' => 0];
+
         return $fields;
     }
 
