@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="SV_ProxyLinkForum" title="Proxy Link Forum" version_string="1.2.0" version_id="1020000" url="https://xenforo.com/community/resources/proxy-link-forum.4449/" install_callback_class="SV_ProxyLinkForum_Installer" install_callback_method="install" uninstall_callback_class="SV_ProxyLinkForum_Installer" uninstall_callback_method="uninstall">
+<addon addon_id="SV_ProxyLinkForum" title="Proxy Link Forum" version_string="1.2.1" version_id="1020100" url="https://xenforo.com/community/resources/proxy-link-forum.4449/" install_callback_class="SV_ProxyLinkForum_Installer" install_callback_method="install" uninstall_callback_class="SV_ProxyLinkForum_Installer" uninstall_callback_method="uninstall">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties/>
@@ -21,6 +21,7 @@
   <code_event_listeners>
     <listener event_id="load_class" execute_order="4449" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_NodeHandler_LinkForum" description="XenForo_NodeHandler_LinkForum"/>
     <listener event_id="load_class_model" execute_order="4449" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_Model_Forum" description="XenForo_Model_Forum"/>
+    <listener event_id="load_class_model" execute_order="4449" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_Model_Node" description="XenForo_Model_Node"/>
     <listener event_id="load_class_datawriter" execute_order="4449" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_DataWriter_LinkForum" description="XenForo_DataWriter_LinkForum"/>
     <listener event_id="load_class_controller" execute_order="4449" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerAdmin_LinkForum" description="XenForo_ControllerAdmin_LinkForum"/>
     <listener event_id="load_class_controller" execute_order="4449" callback_class="SV_ProxyLinkForum_Listener" callback_method="load_class" active="1" hint="XenForo_ControllerPublic_LinkForum" description="XenForo_ControllerPublic_LinkForum"/>

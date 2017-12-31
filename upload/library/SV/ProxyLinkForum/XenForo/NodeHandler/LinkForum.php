@@ -30,8 +30,16 @@ class SV_ProxyLinkForum_XenForo_NodeHandler_LinkForum extends XFCP_SV_ProxyLinkF
         return $this->_getForumLikePushableData($node, $childPushable);
     }
 
+    /**
+     * @param int[] $nodeIds
+     * @return array
+     */
     public function getExtraDataForNodes(array $nodeIds)
     {
+        if (SV_ProxyLinkForum_Globals::$disableLinkProxy)
+        {
+            return [];
+        }
         $userId = XenForo_Visitor::getUserId();
         $permissionCombinationId = XenForo_Visitor::getPermissionCombinationId();
         $forumFetchOptions = ['readUserId' => $userId, 'permissionCombinationId' => $permissionCombinationId];
